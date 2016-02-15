@@ -10,7 +10,7 @@
 namespace Utils
 {
 
-class GlobalConfig :: NotInstantiable
+class GlobalConfig : NotInstantiable
 {
 public:
     static void init(const std::string& filename, int argc, char** argv);
@@ -20,7 +20,7 @@ public:
     static int getInt(const std::string& section, const std::string& name, const int fallback = 0);
     static double getDouble(const std::string& section, const std::string& name, const double fallback = 0.0);
     static const std::string& getString(const std::string& section, const std::string& name, const std::string& fallback = empty_string);
-    static bool getInD(const std::string& section, const std::string& name, const bool fallback = false);
+    static bool getInd(const std::string& section, const std::string& name, const bool fallback = false);
 
     static void defineVariable(const std::string& section, const std::string& name, const std::string& value);
     static void defineVariable(const std::string& name, const std::string& value);
