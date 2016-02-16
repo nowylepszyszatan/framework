@@ -6,13 +6,13 @@
 namespace Utils
 {
 
-const std:string LogMgr::COUT_ID = "_LogMgr_cout_id_";
+const std::string LogMgr::COUT_ID = "_LogMgr_cout_id_";
 
 std::unordered_map<std::string, std::shared_ptr<Logger>> LogMgr::s_loggers = { {LogMgr::COUT_ID, std::make_shared<Logger>() } };
 
 std::mutex LogMgr::s_mgrMutex;
 
-Logger& LogMgr::get(const std::string& loggerId);
+Logger& LogMgr::get(const std::string& loggerId)
 {
     return findLogger(loggerId);
 }
@@ -40,7 +40,7 @@ Logger& LogMgr::createLogger(const std::string& filename, const std::string& log
     // else if logger already exists
     else
     {
-        std::cerr << "Logger with id: " << loggerId << " already exists!" << std::end;
+        std::cerr << "Logger with id: " << loggerId << " already exists!" << std::endl;
 
         return *(logger->second);
     }
@@ -92,7 +92,7 @@ void LogMgr::closeAllLoggers()
         logger.second->close();
     }
 
-    s_loggers.clears();
+    s_loggers.clear();
 }
 
 void LogMgr::turnOnDebugLogs()

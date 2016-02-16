@@ -1,9 +1,11 @@
 #include "ThreadPool.h"
 
+namespace Utils
+{
 
 ThreadPool::ThreadPool(size_t pool_size)
 {
-    for (int i = 0; i < pool_size; i++)
+    for (size_t i = 0; i < pool_size; i++)
         m_workers.emplace_back([this]
         {
             for (;;)
@@ -27,4 +29,6 @@ void ThreadPool::submit(const Task& f)
     if (f)
         m_queue.push(f);
 }
+
+} // namespace Utils
 

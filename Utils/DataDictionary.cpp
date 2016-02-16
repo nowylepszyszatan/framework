@@ -8,7 +8,7 @@ void DataDictionary::addNewItem(const std::shared_ptr<DataItem> item)
 {
     if (_dictionary.find(item->name()) == _dictionary.end())
     {
-        _distionary.emplace(item->name(), item);
+        _dictionary.emplace(item->name(), item);
     }
     else
     {

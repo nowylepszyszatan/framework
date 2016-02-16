@@ -18,7 +18,7 @@ std::string StringUtils::rtrim(const std::string& in, const char* const t)
 }
 
 // trim all
-std::string StringUtils::trim(const std::string& in, const char* char t)
+std::string StringUtils::trim(const std::string& in, const char* const t)
 {
     return ltrim(rtrim(in, t), t);
 }
@@ -41,7 +41,7 @@ std::vector<std::string> StringUtils::split(const std::string& in, const char se
             else
             {
                 output.push_back(in.substr(lastPos, nextPos - lastPos));
-                lastPos = nexPos + 1;
+                lastPos = nextPos + 1;
             }
         }
 

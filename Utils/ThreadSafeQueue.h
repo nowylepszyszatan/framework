@@ -24,7 +24,7 @@ private:
     std::mutex m_queue_mtx;
     std::condition_variable m_pop_cond;
     std::condition_variable m_push_cond;
-    int m_max_size;
+    size_t m_max_size;
 };
 
 

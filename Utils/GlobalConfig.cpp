@@ -30,13 +30,13 @@ void parseConfigLine(const std::string& line, const std::string& actualSection)
     if (variableNameEnd - variableNameStart < 1)
         throw std::runtime_error("Missing variable name in config line: " + line);
 
-    if (line.lenght() - variableNameEnd < 1)
+    if (line.length() - variableNameEnd < 1)
         throw std::runtime_error("Missing variable value in config line: " + line);
 
     std::string variableName  = line.substr(variableNameStart, variableNameEnd - variableNameStart);
-    std::string variableValue = line.substr(variableNameEnd + 1, line.lenght() - variableNameEnd);
+    std::string variableValue = line.substr(variableNameEnd + 1, line.length() - variableNameEnd);
 
-    if (variable.size() && ispunct(variableValuie[0]) && variableValue[0] != '/')
+    if (variableValue.size() && ispunct(variableValue[0]) && variableValue[0] != '/')
     {
         std::cerr << "Warning: found punctation at start of variable, probably a mistake. Line is: " << line << std::endl;
     }
@@ -48,7 +48,7 @@ std::string parseSectionLine(const std::string& line)
 {
     if (line.front() == '[' && line.back() == ']')
     {
-        return line.substr(1, line.length() - 2):
+        return line.substr(1, line.length() - 2);
     }
     else
     {
@@ -78,13 +78,13 @@ void parseLine(const std::string& line)
     }
 }
 
-void GlobalConfig::init(const std::string& fileName, int argc, char** argv)
+void GlobalConfig::init(const std::string& filename, int argc, char** argv)
 {
     loadConfigFromFile(filename);
     loadConfigFromCommandLine(argc, argv);
 }
 
-void GlobalConfig::init(const std::string& fileName)
+void GlobalConfig::init(const std::string& filename)
 {
     loadConfigFromFile(filename);
 }
@@ -98,7 +98,7 @@ int GlobalConfig::getInt(const std::string& section, const std::string& name, co
 {
     auto x = s_variables.find(section + "::" + name);
 
-    if (x != s_variable.end())
+    if (x != s_variables.end())
     {
         return std::stoi(x->second);
     }
@@ -108,11 +108,11 @@ int GlobalConfig::getInt(const std::string& section, const std::string& name, co
     }
 }
 
-int GlobalConfig::getDouble(const std::string& section, const std::string& name, const double fallback)
+double GlobalConfig::getDouble(const std::string& section, const std::string& name, const double fallback)
 {
     auto x = s_variables.find(section + "::" + name);
 
-    if (x != s_variable.end())
+    if (x != s_variables.end())
     {
         return std::stod(x->second);
     }
@@ -122,13 +122,13 @@ int GlobalConfig::getDouble(const std::string& section, const std::string& name,
     }
 }
 
-int GlobalConfig::getString(const std::string& section, const std::string& name, const std::string& fallback)
+const std::string& GlobalConfig::getString(const std::string& section, const std::string& name, const std::string& fallback)
 {
     auto x = s_variables.find(section + "::" + name);
 
-    if (x != s_variable.end())
+    if (x != s_variables.end())
     {
-        x->second;
+        return x->second;
     }
     else
     {
@@ -136,11 +136,11 @@ int GlobalConfig::getString(const std::string& section, const std::string& name,
     }
 }
 
-int GlobalConfig::getInd(const std::string& section, const std::string& name, const bool fallback)
+bool GlobalConfig::getInd(const std::string& section, const std::string& name, const bool fallback)
 {
     auto x = s_variables.find(section + "::" + name);
 
-    if (x != s_variable.end())
+    if (x != s_variables.end())
     {
         return (x->second == "y" || x->second == "Y");
     }
@@ -199,16 +199,9 @@ void GlobalConfig::loadConfigFromCommandLine(int argc, char** argv)
     }
     catch (...)
     {
-        std::cerr << "Uknown exception while parsing command line! " << std::end;
+        std::cerr << "Uknown exception while parsing command line! " << std::endl;
     }
 }
-
-
-
-
-
-
-
 
 } // namespace Utils
 
