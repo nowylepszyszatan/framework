@@ -1,6 +1,6 @@
 CXX:= g++
 CXXFLAGS:= -std=c++11 -Wall -g
-OBJECTS:= LogMgr.o Logger.o GlobalConfig.o DataDictionary.o StringUtils.o ThreadPool.o
+OBJECTS:= LogMgr.o Logger.o GlobalConfig.o DataDictionary.o StringUtils.o ThreadPool.o Program.o
 LIB:= lib/libUtils.a
 
 $(LIB): $(OBJECTS)

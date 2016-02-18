@@ -25,7 +25,7 @@ Logger::Logger(const std::string& filename) :
 {
     _out.open(filename);
 
-    if (_out.is_open())
+    if (!_out.is_open())
     {
         std::cerr << "Logger::Logger() Failed to open log file: " + filename << std::endl;
 

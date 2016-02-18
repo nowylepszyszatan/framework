@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <mutex>
 
 namespace Utils
 {
@@ -11,8 +12,14 @@ class Singleton
 public:
     static T& instance();
 
+protected:
+    inline explicit Singleton() 
+    {
+        s_instance = static_cast<T*>(this);
+    };
+
 private:
-    Singleton() {};
+
     Singleton(const Singleton<T>&) = delete;
     const Singleton<T>& operator=(const Singleton<T>&) = delete;
 
@@ -33,7 +40,7 @@ T& Singleton<T>::instance()
     return s_instance;
 }
 
-template <class t> T* Singleton<T>::s_instance = nullptr;
+template <class T> T* Singleton<T>::s_instance = nullptr;
 
 } // namespace Utils
 
