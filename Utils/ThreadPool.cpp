@@ -20,7 +20,8 @@ ThreadPool::ThreadPool(size_t pool_size)
 
 ThreadPool::~ThreadPool()
 {
-    for (auto& worker : m_workers) m_queue.push(Task());
+    for (size_t i = 0; i < m_workers.size(); i++) m_queue.push(Task());
+
     for (auto& worker : m_workers) worker.join();
 }
 
